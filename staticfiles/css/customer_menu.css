@@ -1,0 +1,122 @@
+:root {
+    --primary: #fc8019;
+    --secondary: #ffffff;
+    --bg-light: #fbfbfb;
+    --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.menu-container {
+    padding: 2rem 0;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.user-info h3 span {
+    color: var(--primary);
+}
+
+.user-info p {
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.cart-btn {
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s;
+}
+
+.cart-btn:hover {
+    transform: translateY(-2px);
+}
+
+.table-card {
+    background: var(--secondary);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.dish-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.food-img-wrapper img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.dish-desc {
+    color: #666;
+    font-size: 0.9rem;
+    max-width: 250px;
+}
+
+.dish-price {
+    font-weight: 600;
+    color: #333;
+}
+
+.indicator {
+    font-size: 1.2rem;
+}
+
+.veg {
+    color: #4caf50;
+}
+
+.non-veg {
+    color: #f44336;
+}
+
+.add-btn {
+    display: inline-block;
+    background: var(--bg-light);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.add-btn:hover {
+    background: var(--primary);
+    color: var(--secondary);
+}

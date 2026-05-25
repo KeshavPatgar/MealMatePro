@@ -1,0 +1,114 @@
+/* success_style.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.success-wrapper {
+    width: 100%;
+    max-width: 500px;
+}
+
+.success-card {
+    background: #ffffff;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    border: 1px solid #f1f5f9;
+}
+
+/* Success Checkmark Icon */
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    background-color: #ecfdf5; /* Soft Green */
+    color: #10b981; /* Success Green */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 30px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+h1 span {
+    color: #10b981;
+}
+
+p {
+    color: #64748b;
+    font-size: 1rem;
+    margin-bottom: 35px;
+    line-height: 1.5;
+}
+
+/* Action Buttons */
+.action-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-primary {
+    background-color: #1e293b;
+    color: white;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #10b981; /* Shifts to green on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.btn-secondary {
+    color: #64748b;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #f8fafc;
+    color: #1e293b;
+    border-color: #cbd5e1;
+}
+
+.footer-note {
+    margin-top: 30px;
+    font-size: 0.85rem;
+}
+
+.footer-note a {
+    color: #ef4444; /* Alert red for sign out */
+    text-decoration: none;
+    font-weight: 600;
+}
