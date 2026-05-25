@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-n+fplp^a34fc*m$4y0n^i1+5(fnw&ty3%4ue+^k5%hd^hrdhsp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -123,3 +123,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 RAZORPAY_KEY_ID = "rzp_test_Ssg7K3EUaCIzfG"
 RAZORPAY_KEY_SECRET = "wJI7pHchRiyAvZ3LU8t97yLz"
+
+import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
