@@ -15,7 +15,7 @@ class User(models.Model):
     
 class Restaurant(models.Model):
     name = models.CharField(max_length = 20)
-    picture = models.URLField(max_length = 10000, default='https://m.ahstatic.com/is/image/accorhotels/HCM_P_8147067:4by3?fmt=jpg&op_usm=1.75,0.3,2,0&resMode=sharp2&iccEmbed=true&icc=sRGB&dpr=on,1.5&wid=335&hei=251&qlt=80')
+    picture = models.URLField(max_length = 100000, default='https://m.ahstatic.com/is/image/accorhotels/HCM_P_8147067:4by3?fmt=jpg&op_usm=1.75,0.3,2,0&resMode=sharp2&iccEmbed=true&icc=sRGB&dpr=on,1.5&wid=335&hei=251&qlt=80')
     cuisine = models.CharField(max_length = 200)
     rating = models.FloatField()
 
@@ -25,7 +25,7 @@ class Item(models.Model):
     description = models.CharField(max_length = 200)
     price = models.FloatField()
     vegeterian = models.BooleanField(default=False)
-    picture = models.URLField(max_length = 10000, default='https://www.indiafilings.com/learn/wp-content/uploads/2024/08/How-to-Start-Food-Business.jpg')
+    picture = models.URLField(max_length = 100000, default='https://www.indiafilings.com/learn/wp-content/uploads/2024/08/How-to-Start-Food-Business.jpg')
 
 class Cart(models.Model):
     customer = models.ForeignKey(User, on_delete = models.CASCADE, related_name = "cart")
