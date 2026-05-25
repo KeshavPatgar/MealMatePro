@@ -86,7 +86,7 @@ import os
 
 DATABASES = {
     'default': dj_database_url.parse(
-        os.environ.get("postgresql://mealmatedb_a47c_user:e3KUF3aM0cH2J8DH2npezpLpf3ov7Qiz@dpg-d8a3fd99rddc739objdg-a.oregon-postgres.render.com/mealmatedb_a47c")
+        os.environ.get("DATABASE_URL")
     )
 }
 
