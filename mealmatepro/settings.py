@@ -74,11 +74,20 @@ WSGI_APPLICATION = 'mealmatepro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+import dj_database_url
+import os
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        os.environ.get("postgresql://mealmatedb_a47c_user:e3KUF3aM0cH2J8DH2npezpLpf3ov7Qiz@dpg-d8a3fd99rddc739objdg-a.oregon-postgres.render.com/mealmatedb_a47c")
+    )
 }
 
 
@@ -129,5 +138,6 @@ import os
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 
