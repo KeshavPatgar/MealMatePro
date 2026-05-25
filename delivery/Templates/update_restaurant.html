@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/update_restaurant.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="edit-wrapper">
+    <div class="edit-card">
+        <div class="edit-header">
+            <h2>Edit <span>Restaurant</span></h2>
+            <p>Modify the details for <strong>{{restaurant.name}}</strong></p>
+        </div>
+
+        <form action="{% url 'update_restaurant' restaurant.id %}" method="post" class="edit-form">
+            {% csrf_token %}
+            
+            <div class="form-row">
+                <label for="id_name">Restaurant Name</label>
+                <input type="text" id="id_name" name="name" value="{{restaurant.name}}" placeholder="Update name..." required>
+            </div>
+
+            <div class="form-row">
+                <label for="id_picture">Picture URL</label>
+                <input type="url" id="id_picture" name="picture" value="{{restaurant.picture}}" placeholder="Update image link...">
+            </div>
+
+            <div class="form-row">
+                <label for="id_cuisine">Cuisine Type</label>
+                <input type="text" id="id_cuisine" name="cuisine" value="{{restaurant.cuisine}}" placeholder="e.g. Italian, Fast Food">
+            </div>
+
+            <div class="form-row">
+                <label for="id_rating">Rating (0 - 5)</label>
+                <input type="number" id="id_rating" name="rating" min="0" max="5" step="0.5" value="{{restaurant.rating}}">
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-cancel" onclick="history.back()">Cancel</button>
+                <button type="submit" class="btn-update">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

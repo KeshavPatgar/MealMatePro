@@ -1,0 +1,130 @@
+/* admin_home.css */
+:root {
+  --primary: #fc8019;
+  --secondary: #ffffff;
+  --bg-light: #fbfbfb;
+  --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+  --text-dark: #333333;
+  --text-muted: #666666;
+}
+
+.admin-page {
+  padding: 40px;
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.btn-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: var(--secondary);
+  color: var(--text-dark);
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-nav:hover {
+  transform: translateY(-2px);
+  color: var(--primary);
+}
+
+.content-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.glass-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.glass-header h1 {
+  font-size: 2.5rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.accent {
+  color: var(--primary);
+}
+
+.glass-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.action-card {
+  background: var(--secondary);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(252, 128, 25, 0.15);
+}
+
+.icon-box {
+  background: rgba(252, 128, 25, 0.1);
+  color: var(--primary);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card-text h3 {
+  color: var(--text-dark);
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.card-text p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.card-arrow {
+  margin-top: 20px;
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.action-card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}

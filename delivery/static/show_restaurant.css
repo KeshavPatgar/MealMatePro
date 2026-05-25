@@ -1,0 +1,188 @@
+/* --- 1. CORE RESET & BASE --- */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 40px 20px; /* Increased padding for breathing room */
+    min-height: 100vh;
+}
+
+.inventory-page {
+    max-width: 1300px; /* Wider container for a bigger feel */
+    margin: 0 auto;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* --- 2. HEADER & NAVIGATION --- */
+.top-nav { margin-bottom: 30px; }
+
+.btn-back {
+    text-decoration: none; color: #666;
+    font-size: 1rem; font-weight: 700;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-back:hover { color: #fc8019; transform: translateX(-8px); }
+.btn-back:active { transform: translateX(-4px) scale(0.95); }
+
+.page-header { margin-bottom: 50px; }
+.page-header h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -2px; }
+.page-header h1 span { color: #fc8019; }
+.page-header p { color: #888; font-size: 1.1rem; margin-top: 10px; }
+
+/* --- 3. THE "BIG BOX" TABLE --- */
+.table-container {
+    background: #0d0d0d;
+    border-radius: 32px; /* Extra rounded corners */
+    overflow: hidden;
+    border: 1px solid #1a1a1a;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+}
+
+.pro-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.pro-table thead {
+    background: #151515;
+    border-bottom: 2px solid #222;
+}
+
+.pro-table th {
+    padding: 30px; /* Big padding */
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fc8019;
+    font-weight: 800;
+}
+
+.pro-table td {
+    padding: 25px 30px; /* Spacious cell padding */
+    border-bottom: 1px solid #1a1a1a;
+    vertical-align: middle;
+    transition: all 0.3s ease;
+}
+
+.pro-table tbody tr:hover td {
+    background: #111111; /* Subtle row highlight */
+}
+
+/* Larger Image Preview */
+.img-frame {
+    width: 90px; height: 90px; /* Increased from 60px */
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    border: 2px solid #222;
+    transition: 0.4s;
+}
+.img-frame img { width: 100%; height: 100%; object-fit: cover; }
+.pro-table tr:hover .img-frame { transform: scale(1.1) rotate(-3deg); border-color: #fc8019; }
+
+.res-name { font-size: 1.25rem; font-weight: 800; color: #fff; display: inline-block; transition: all 0.3s ease; }
+.pro-table tr:hover .res-name { color: #fc8019; transform: translateX(5px); }
+.res-cuisine { color: #777; font-size: 1rem; }
+
+/* Rating Badge */
+.rating-badge {
+    background: rgba(252, 128, 25, 0.15);
+    color: #fc8019;
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1rem;
+    border: 1px solid rgba(252, 128, 25, 0.2);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.rating-badge:hover {
+    background: #fc8019;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(252, 128, 25, 0.3);
+}
+
+/* --- 4. INTERACTIVE ACTION BUTTONS --- */
+.action-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* More space between buttons */
+}
+
+.action-stack a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 10px 15px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-edit { background: #222; color: #fff; }
+.btn-menu { border: 2px solid #fc8019; color: #fc8019; }
+.btn-delete { color: #ff4d4d; opacity: 0.7; }
+
+.btn-edit:hover { background: #fff; color: #000; transform: translateY(-3px); }
+.btn-menu:hover { background: #fc8019; color: #000; transform: translateY(-3px); }
+.btn-delete:hover { color: #ff4d4d; opacity: 1; transform: scale(1.05); }
+
+.action-stack a:active {
+    transform: scale(0.95);
+}
+
+/* --- 5. MOBILE RESPONSIVE (BIG CARDS) --- */
+@media (max-width: 900px) {
+    .pro-table thead { display: none; }
+
+    .pro-table, .pro-table tbody, .pro-table tr, .pro-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .pro-table tr {
+        background: #0d0d0d;
+        margin-bottom: 30px;
+        border: 1px solid #222;
+        border-radius: 32px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .pro-table td {
+        border: none;
+        position: relative;
+        padding-left: 45%;
+        text-align: right;
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .pro-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: #555;
+        letter-spacing: 1px;
+    }
+
+    .img-frame { margin: 10px 0 10px auto; width: 120px; height: 120px; }
+    .action-stack { flex-direction: row; justify-content: center; margin-top: 20px; border-top: 1px solid #222; padding-top: 20px; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

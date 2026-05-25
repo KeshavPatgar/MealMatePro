@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MealMate Pro - Taste the Best of Bengaluru{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="hero">
+    <h1 class="hero-text">Taste the Best of <span class="highlight">Bengaluru</span></h1>
+    <h2 class="hero-subtitle">Delicious Meals, Delivered Fast</h2>
+    <p class="hero-subtext">Discover the best meals in town, delivered to your doorstep in minutes.</p>
+</main>
+
+<section class="food-gallery">
+    <h2 class="section-title">What's on your mind?</h2>
+    <div class="cuisines-container">
+        <a href="{% url 'search' %}?q=Biriyani" class="food-item" style="text-decoration: none; color: inherit;">
+            <div class="food-circle biryani"></div>
+            <span>Biriyani</span>
+        </a>
+        <a href="{% url 'search' %}?q=Cake" class="food-item" style="text-decoration: none; color: inherit;">
+            <div class="food-circle cake"></div>
+            <span>Cakes</span>
+        </a>
+        <a href="{% url 'search' %}?q=Chicken" class="food-item" style="text-decoration: none; color: inherit;">
+            <div class="food-circle kfc"></div>
+            <span>Chicken</span>
+        </a>
+        <a href="{% url 'search' %}?q=Veg" class="food-item" style="text-decoration: none; color: inherit;">
+            <div class="food-circle veg"></div>
+            <span>Pure Veg</span>
+        </a>
+        <a href="{% url 'search' %}?q=Holige" class="food-item" style="text-decoration: none; color: inherit;">
+            <div class="food-circle holige"></div>
+            <span>Holige</span>
+        </a>
+    </div>
+</section>
+
+<section class="services">
+    <div class="services-wrapper">
+        <a href="{% url 'search' %}?q=Meal" class="service-link">
+            <div class="service-card">
+                <div class="card-content">
+                    <h2>MEAL PLANS</h2>
+                    <p>DAILY TIFFIN SERVICE</p>
+                    <span class="offer-tag">FROM ₹80</span>
+                </div>
+                <div class="card-footer">
+                    <div class="arrow-btn">→</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="{% url 'search' %}?q=Cake" class="service-link">
+            <div class="service-card">
+                <div class="card-content">
+                    <h2>PARTY CAKES</h2>
+                    <p>CUSTOM DESIGNS</p>
+                    <span class="offer-tag">ORDER NOW</span>
+                </div>
+                <div class="card-footer">
+                    <div class="arrow-btn">→</div>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

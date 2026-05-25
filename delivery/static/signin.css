@@ -1,0 +1,116 @@
+/* --- signin.css --- */
+
+/* 1. Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #fc8019; /* Swiggy Orange */
+    background: linear-gradient(135deg, #fc8019 0%, #ff9f43 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 2. Glassmorphism Card 
+   Talking Point: I used backdrop-filter for a blurred 'glass' effect 
+   to ensure the UI feels modern and high-end.
+*/
+.signin-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 400px;
+    padding: 50px 40px;
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Typography */
+h3 {
+    color: #282c3f; /* Deep Navy */
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 35px;
+    letter-spacing: -1px;
+}
+
+/* 4. Form Controls */
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-field {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #686b78;
+    margin-bottom: 8px;
+    display: block;
+    padding-left: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 15px;
+    border: 2px solid #f0f0f0;
+    background: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Interaction: Input focus glow */
+input:focus {
+    border-color: #fc8019;
+    box-shadow: 0 0 15px rgba(252, 128, 25, 0.15);
+}
+
+/* 5. The Button (Swiggy Style) 
+   Talking Point: A dark button creates a strong focal point 
+   against the white and orange UI.
+*/
+button {
+    background: #282c3f;
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #000000;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+button:active {
+    transform: translateY(0);
+}

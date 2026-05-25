@@ -1,0 +1,124 @@
+/* --- register.css --- */
+
+/* 1. Global Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #fc8019; /* Swiggy Orange */
+    background: linear-gradient(135deg, #fc8019 0%, #ff9f43 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px; /* Extra padding for scrolling on smaller screens */
+}
+
+/* 2. Glassmorphism Card 
+   TALKING POINT: I used a slightly larger card for Register to accommodate 
+   the extra fields while maintaining the blurred background effect.
+*/
+.register-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    animation: fadeInUp 0.7s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Typography */
+h3 {
+    color: #282c3f; /* Deep Navy */
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+/* 4. Form Layout */
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-field {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #686b78;
+    margin-bottom: 6px;
+    display: block;
+    padding-left: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 2px solid #f0f0f0;
+    background: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Custom Textarea Styling */
+textarea {
+    height: 80px;
+    resize: none; /* Prevents user from breaking the UI layout */
+}
+
+/* Interaction: Focus state */
+input:focus, textarea:focus {
+    border-color: #fc8019;
+    box-shadow: 0 0 12px rgba(252, 128, 25, 0.1);
+    transform: scale(1.01); /* Subtle "pop" when typing */
+}
+
+/* 5. The Submit Button 
+   TALKING POINT: I used a high-contrast dark color to make the 
+   primary action stand out clearly.
+*/
+button {
+    background: #282c3f;
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #000000;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+}

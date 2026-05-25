@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile - MealMate Pro{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<style>
+    .profile-form .input-group { margin-bottom: 20px; text-align: left; }
+    .profile-form label { display: block; font-size: 0.85rem; color: #747d8c; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .profile-form input, .profile-form textarea { width: 100%; padding: 10px 15px; border: 1px solid #e1e2e6; border-radius: 8px; font-size: 1rem; color: #2f3542; background: #f8f9fa; transition: border-color 0.3s; font-family: inherit; }
+    .profile-form input:focus, .profile-form textarea:focus { outline: none; border-color: #ff4757; background: #ffffff; }
+    .btn-save { display: inline-block; padding: 12px 20px; background: #2f3542; color: #fff; text-decoration: none; font-weight: 600; text-align: center; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-bottom: 15px;}
+    .btn-save:hover { background: #57606f; }
+    .alert-success { background: #d4edda; color: #155724; padding: 12px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #c3e6cb; text-align: center; font-size: 0.9rem; font-weight: 500; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-card shadow-md">
+        <div class="profile-header">
+            <div class="avatar">
+                {{ username|make_list|first|upper|default:"U" }}
+            </div>
+            <h2>{{ username|default:"Guest User" }}</h2>
+            <p class="role">MealMate Pro Member</p>
+        </div>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <form action="{% url 'profile' username %}" method="post" class="profile-form" autocomplete="off">
+            {% csrf_token %}
+            <div class="profile-body">
+                <div class="info-group input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" value="{{ customer.email }}" placeholder="Enter your email" required>
+                </div>
+                <div class="info-group input-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" value="{{ customer.mobile }}" placeholder="Enter your mobile number" pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" required>
+                </div>
+                <div class="info-group input-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" name="address" rows="3" placeholder="Enter your delivery address" required>{{ customer.address }}</textarea>
+                </div>
+                <div class="info-group input-group" id="password-trigger">
+                    <button type="button" class="btn-save" style="background: #747d8c; margin-bottom: 0; font-size: 0.85rem; padding: 8px 15px;" onclick="showPasswordSection()">Change Password</button>
+                </div>
+                <div class="info-group input-group" id="password-section" style="display: none;">
+                    <label for="password">New Password</label>
+                    <!-- Hidden dummy field to intercept browser autofill and suggestions -->
+                    <input type="password" style="display:none" aria-hidden="true">
+                    <input type="password" 
+                           id="new_secure_p" 
+                           name="new_secure_p" 
+                           placeholder="Enter new password" 
+                           autocomplete="off"
+                           readonly 
+                           onfocus="this.removeAttribute('readonly'); this.setAttribute('autocomplete', 'new-password');">
+                </div>
+            </div>
+            
+            <div class="profile-footer">
+                <button type="submit" class="btn-save w-100">Save Changes</button>
+                <a href="{% url 'logout' %}" class="btn-primary w-100 logout-btn">Sign Out</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showPasswordSection() {
+        document.getElementById('password-trigger').style.display = 'none';
+        document.getElementById('password-section').style.display = 'block';
+        // Small timeout to ensure the element is visible before focusing
+        setTimeout(() => document.getElementById('new_secure_p').focus(), 10);
+    }
+</script>
+{% endblock %}

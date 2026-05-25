@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/orders.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="orders-container">
+    <div class="summary-container card shadow-md">
+        <div class="summary-header">
+            <div class="status-badge">Order Confirmed</div>
+            <h1>Thanks for your order, <span>{{ username }}</span>!</h1>
+            <p class="order-id">Transaction ID: #MM-{{ 10245|add:customer.id }}</p>
+        </div>
+
+        <div class="summary-card">
+            <div class="section-title">
+                <span class="icon">📍</span>
+                <h3>Delivery Address</h3>
+            </div>
+            <div class="address-box">
+                <p>{{ customer.address }}</p>
+            </div>
+            <p class="delivery-hint">Our partner is on the way to this location. Please keep your phone reachable.</p>
+        </div>
+
+        <div class="summary-footer">
+            <p>Thank you for choosing <strong>MealMate</strong>!</p>
+            
+            <div class="nav-links">
+                {% if cart_items %}
+                    <a href="{% url 'view_menu' cart_items.0.restaurant.id username %}" class="btn btn-outline">
+                        ← Back to Menu
+                    </a>
+                {% else %}
+                    <a href="{% url 'open_signin' %}" class="btn btn-outline">← Back to Home</a>
+                {% endif %}
+                <a href="#" class="btn btn-primary">Track Order</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

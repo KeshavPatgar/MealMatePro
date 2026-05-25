@@ -1,0 +1,153 @@
+/* site-theme.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #fcfcfd;
+    color: #2d3436;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+.summary-container {
+    width: 100%;
+    max-width: 550px;
+}
+
+/* Header Styling */
+.summary-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.status-badge {
+    display: inline-block;
+    background: #e3f9e5;
+    color: #1f7a28;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.summary-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.summary-header h1 span {
+    color: #ff4757;
+}
+
+.order-id {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-top: 5px;
+}
+
+/* Card Styling */
+.summary-card {
+    background: #ffffff;
+    border: 1px solid #edf2f7;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.section-title h3 {
+    font-size: 1rem;
+    color: #636e72;
+}
+
+.address-box {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #ff4757;
+    margin-bottom: 20px;
+}
+
+.address-box p {
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.delivery-hint {
+    font-size: 0.85rem;
+    color: #b2bec3;
+    font-style: italic;
+}
+
+/* Footer & Buttons */
+.summary-footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.summary-footer p {
+    margin-bottom: 25px;
+    color: #636e72;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-outline, .btn-fill {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn-outline {
+    border: 1px solid #dfe6e9;
+    color: #636e72;
+}
+
+.btn-outline:hover {
+    background: #f1f2f6;
+    color: #2d3436;
+}
+
+.btn-fill {
+    background: #111;
+    color: #fff;
+}
+
+.btn-fill:hover {
+    background: #ff4757;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .nav-links {
+        flex-direction: column;
+    }
+    .summary-card {
+        padding: 20px;
+    }
+}

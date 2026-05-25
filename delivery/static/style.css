@@ -1,0 +1,568 @@
+/* --- 1. GLOBAL RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    background-image: linear-gradient(to bottom, #fc8019 0%, #fc8019 800px, transparent 800px);
+    background-repeat: no-repeat;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- 2. NAVBAR --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo-main {
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+}
+
+.pro-tag {
+    background: #000;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-left: 8px;
+    font-size: 0.7rem;
+}
+
+.auth-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-nav {
+    text-decoration: none;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-outline {
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-outline:hover {
+    background: #fff;
+    color: #fc8019;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-solid {
+    background: #fff;
+    color: #fc8019;
+}
+
+.btn-solid:hover {
+    background: #282c3f;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* --- 4. HERO SECTION --- */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    animation: fadeInUp 0.8s ease-out both;
+}
+
+.hero-text {
+    font-size: clamp(2.2rem, 8vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.highlight {
+    color: #282c3f;
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.4s ease, color 0.3s ease;
+}
+
+.highlight:hover {
+    transform: scale(1.05) rotate(-2deg);
+    text-shadow: 4px 4px 0px rgba(255, 255, 255, 0.4);
+    color: #000;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    margin: 15px 0;
+    font-weight: 600;
+}
+
+.hero-subtext {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* --- 5. FOOD GALLERY (FIXED WIDTH) --- */
+.food-gallery {
+    width: 100%;
+    /* Changed from 50% to 100% to fix layout */
+    padding: 50px 5%;
+    background: #ffffff;
+    color: #282c3f;
+    border-radius: 30px 30px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    text-align: center;
+}
+
+.cuisines-container {
+    display: flex;
+    justify-content: center;
+    /* Centers items on desktop */
+    gap: 30px;
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px;
+    /* Space for the hover scale to not cut */
+    scrollbar-width: none;
+}
+
+.cuisines-container::-webkit-scrollbar {
+    display: none;
+}
+
+.food-item {
+    text-align: center;
+    flex: 0 0 auto;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+/* IMAGE HOVER FIX: We scale the whole item, not just the circle, 
+   and ensure the container has enough padding so it's never cut. */
+.food-item:hover {
+    transform: scale(1.15);
+    z-index: 10;
+}
+
+.food-circle {
+    width: clamp(130px, 15vw, 180px);
+    height: clamp(130px, 15vw, 180px);
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    margin-bottom: 15px;
+    border: 4px solid transparent;
+    transition: 0.3s;
+}
+
+.food-item:hover .food-circle {
+    border-color: #fc8019;
+    box-shadow: 0 15px 35px rgba(252, 128, 25, 0.5), 0 0 20px rgba(252, 128, 25, 0.2);
+}
+
+.food-item span {
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.food-item:hover span {
+    color: #fc8019;
+}
+
+/* --- 6. SERVICE CARDS (CORRECT MIDDLE LEFT/RIGHT) --- */
+.services {
+    padding: 60px 20px;
+    background-color: #fdfdfd;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.services-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.service-link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1 1 300px;
+    max-width: 450px;
+}
+
+.service-card {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    border-radius: 24px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    background-size: 200% 200%;
+    animation: gradientPan 6s ease infinite;
+}
+
+.service-link:nth-child(2) .service-card {
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    background-size: 200% 200%;
+    animation: gradientPan 6s ease infinite reverse;
+}
+
+.service-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 107, 129, 0.3);
+    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+}
+
+.service-link:nth-child(2) .service-card:hover {
+    background: linear-gradient(135deg, #8971ea 0%, #f7a0dc 100%);
+    box-shadow: 0 20px 40px rgba(161, 140, 209, 0.3);
+}
+
+.card-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    color: #fff;
+    text-shadow: 1px 2px 4px rgba(0,0,0,0.1);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.card-content p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.offer-tag {
+    display: inline-block;
+    background-color: #fff;
+    color: #ff4757;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.service-card:hover .offer-tag {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.service-link:nth-child(2) .offer-tag {
+    color: #a18cd1;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.arrow-btn {
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255,255,255,0.3);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.service-card:hover .arrow-btn {
+    transform: translateX(8px);
+    background-color: #fff;
+    color: #ff758c;
+}
+
+.service-link:nth-child(2) .service-card:hover .arrow-btn {
+    color: #8971ea;
+}
+
+/* --- 7. MOBILE RESPONSIVENESS --- */
+@media (max-width: 1024px) {
+    .cuisines-container {
+        justify-content: flex-start;
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 4%;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero-text {
+        font-size: 2.5rem;
+    }
+
+    .services-wrapper {
+        gap: 25px;
+    }
+
+    .service-card {
+        padding: 30px;
+        min-height: 320px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-main .brand-name {
+        display: none;
+    }
+
+    /* Show icon only on tiny screens */
+    .food-circle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* Food Images */
+.biryani {
+    background-image: url('https://cdn.uengage.io/uploads/10295/image-3982-1770195634.jpg');
+}
+
+.cake {
+    background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=300');
+}
+
+.kfc {
+    background-image: url('https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=300');
+}
+
+.veg {
+    background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300');
+}
+
+.holige {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjZU0ossqB4PKiO_NkOirGxrSEP-zB9rMVLvTuNP9NTA&s');
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradientPan {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- THE ULTIMATE INTERACTIVE LINE --- */
+.interactive-black-wrap {
+    text-align: center;
+    padding: 50px 0;
+    background: #191616;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.black-interactive-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    /* Responsive size */
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.static-text {
+    color: #edeaea;
+    /* Starts muted */
+    transition: 0.3s ease;
+}
+
+.morph-word {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    letter-spacing: -0.5px;
+}
+
+/* The Animated Orange Underline */
+.line-draw {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #fc8019;
+    /* Signature Orange */
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: center;
+}
+
+.arrow-svg {
+    display: flex;
+    align-items: center;
+    color: #fc8019;
+    /* Arrow starts Orange */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- HOVER STATE --- */
+
+.black-interactive-link:hover .static-text {
+    color: #ed9b04;
+    /* Wakes up the first word */
+}
+
+.black-interactive-link:hover .morph-word {
+    letter-spacing: 1px;
+    /* Stretches the text slightly */
+    transform: scale(1.05);
+    /* Subtle grow */
+}
+
+.black-interactive-link:hover .line-draw {
+    transform: scaleX(1);
+    /* Draws the orange line */
+}
+
+.black-interactive-link:hover .arrow-svg {
+    transform: translateX(12px) scale(1.2);
+    /* Arrow slides and pops */
+}
+
+/* Subtle background glow on the whole sentence */
+.black-interactive-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(252, 128, 25, 0.08) 0%, transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+
+.black-interactive-link:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* --- UPDATED NAVBAR SCROLL LOGIC --- */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base style for the PRO tag - Keeping it as it is */
+.pro-tag {
+    background: #000;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-left: 8px;
+    font-size: 0.7rem;
+}
+
+/* Scrolled State Changes */
+.navbar.scrolled {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Logo and Register Button (Outline) turn Black */
+.navbar.scrolled .logo-main,
+.navbar.scrolled .btn-outline {
+    color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+/* SIGN IN Button: Background removed, black text, thin black border */
+.navbar.scrolled .btn-solid {
+    background: transparent !important;
+    /* Removes the white background */
+    color: #000000 !important;
+    /* Text becomes black */
+    border: 2px solid #000000 !important;
+    /* Adds the thin black border */
+}
+
+/* SVG Logo changes to Black */
+.navbar.scrolled .mealmate-logo circle {
+    stroke: #000000 !important;
+}
+
+.navbar.scrolled .mealmate-logo path {
+    fill: #000000 !important;
+}
+
+/* NOTE: We are NOT adding a .navbar.scrolled .pro-tag rule, 
+   so the PRO tag stays exactly as you styled it originally. */
+
+.back-btn,
+button[onclick="history.back()"] {
+    display: none !important;
+}

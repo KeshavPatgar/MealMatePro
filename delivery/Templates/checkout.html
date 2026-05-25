@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="checkout-wrapper">
+    <div class="checkout-card">
+        <header class="checkout-header">
+            <div class="lock-icon">🔒</div>
+            <h1>Secure <span>Checkout</span></h1>
+            <p>Welcome back, <strong>{{ username }}</strong></p>
+        </header>
+
+        {% if error %}
+            <div class="error-box">
+                <p>{{ error }}</p>
+                <a href="javascript:history.back()">Go Back</a>
+            </div>
+        {% else %}
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div class="receipt-table">
+                    <table>
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr>
+                                    <td>
+                                        {{ item.name }} {% if item.quantity > 1 %}<span style="color: #747d8c; font-size: 0.9em;">(x{{ item.quantity }})</span>{% endif %}
+                                    </td>
+                                    <td class="text-right">₹{{ item.subtotal|default:item.price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="total-section">
+                    <span>Total Amount</span>
+                    <span class="total-price">₹{{ total_price }}</span>
+                </div>
+            </div>
+
+            <button id="rzp-button" class="pay-btn">
+                Pay Now with Razorpay
+            </button>
+            
+            <p class="secure-note">Your payment is encrypted and secure.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "{{ razorpay_key_id }}",
+        "amount": Math.round(Number("{{ total_price|default:'0' }}") * 100), 
+        "currency": "INR",
+        "name": "MealMate Pro",
+        "description": "Order Payment",
+        "order_id": "{{ order_id }}",
+        "handler": function (response) {
+            window.location.href = "{% url 'orders' username %}";
+        },
+        "prefill": {
+            "name": "{{ username }}",
+            "email": "customer@example.com",
+            "contact": "9999999999"
+        },
+        "theme": {
+            "color": "#fc8019"
+        }
+    };
+    var rzp = new Razorpay(options);
+    document.getElementById('rzp-button').onclick = function(e) {
+        rzp.open();
+        e.preventDefault();
+    }
+</script>
+{% endblock %}

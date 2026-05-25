@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<style>
+    /* UI Enhancements for Cart Controls */
+    .qty-controls { display: inline-flex; align-items: center; background: #f1f2f6; border-radius: 8px; overflow: hidden; border: 1px solid #e1e2e6; }
+    .qty-btn { padding: 6px 12px; color: #2f3542; text-decoration: none; font-weight: bold; background: #ffffff; transition: background 0.2s, color 0.2s; font-size: 1.1rem; }
+    .qty-btn:hover { background: #ff4757; color: #ffffff; }
+    .qty-value { padding: 0 15px; font-weight: 600; font-size: 0.95rem; background: #f1f2f6; min-width: 35px; text-align: center; }
+    .remove-btn { color: #ff4757; display: inline-flex; padding: 8px; border-radius: 50%; background: rgba(255, 71, 87, 0.1); transition: all 0.3s ease; align-items: center; justify-content: center; text-decoration: none; }
+    .remove-btn:hover { background: #ff4757; color: #ffffff; transform: scale(1.05); }
+    .empty-cart-state { text-align: center; padding: 50px 20px; }
+    .empty-cart-state svg { color: #ced6e0; margin-bottom: 15px; }
+    .empty-cart-state h3 { color: #2f3542; font-size: 1.5rem; margin-bottom: 8px; }
+    .empty-cart-state p { color: #747d8c; margin-bottom: 20px; }
+    .btn-browse { display: inline-block; background: #ff4757; color: #fff; padding: 10px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: background 0.3s, transform 0.2s; }
+    .btn-browse:hover { background: #ff6b81; transform: translateY(-2px); }
+    .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Premium Dark Header (Matches Customer Menu) */
+    .cart-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #282c3f 0%, #1a1b26 100%);
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        gap: 10px;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+    .cart-header:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(40, 44, 63, 0.3);
+    }
+    .cart-header h1 { font-size: 2.2rem; color: #ffffff; font-weight: 700; margin: 0; }
+    .cart-header h1 span { color: #fc8019; }
+    .cart-header p { color: #dcdde1; font-size: 1rem; margin: 0; }
+    .cart-header p strong { color: #fc8019; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+    <header class="cart-header">
+        <h1>Your <span>Cart</span></h1>
+        <p>Ready to feast, <strong>{{ username }}</strong>?</p>
+    </header>
+
+    <div class="cart-grid">
+        <div class="items-section">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Dish</th>
+                        <th>Details</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in itemList %}
+                        <tr>
+                            <td>
+                                <div class="cart-img-box">
+                                    <img src="{{ item.picture }}" alt="{{ item.name }}" loading="lazy" onerror="this.src='https://placehold.co/80x80?text=Delicious'">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="item-info">
+                                    <span class="item-name">{{ item.name }}</span>
+                                    <p class="item-desc" style="font-size: 0.85rem; color: #747d8c;">{{ item.description|truncatechars:50 }}</p>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="qty-controls">
+                                    <a href="{% url 'remove_from_cart' item.id username %}" class="qty-btn" title="Decrease Quantity">-</a>
+                                    <span class="qty-value">{{ item.quantity|default:1 }}</span>
+                                    <a href="{% url 'add_to_cart' item.id username %}" class="qty-btn" title="Increase Quantity">+</a>
+                                </div>
+                            </td>
+                            <td class="text-right item-price" style="font-weight: 600;">₹{{ item.subtotal|default:item.price }}</td>
+                            <td class="text-center">
+                                <a href="{% url 'remove_from_cart' item.id username %}?delete=1" class="remove-btn" title="Remove Item">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"></path></svg>
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="empty-cart-state">
+                                <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <h3>Your cart is empty</h3>
+                                <p>Looks like you haven't added any delicious meals yet!</p>
+                                <a href="/" class="btn-browse">Browse Menu</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="summary-section">
+            <div class="summary-card">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Items Total</span>
+                    <span>₹{{ total_price }}</span>
+                </div>
+                <div class="summary-row divider">
+                    <span>Delivery Fee</span>
+                    <span class="free">FREE</span>
+                </div>
+                <div class="total-row">
+                    <span>Grand Total</span>
+                    <span>₹{{ total_price }}</span>
+                </div>
+                
+                <form action="{% url 'checkout' username %}">
+                    <button type="submit" class="checkout-btn" {% if not itemList %}disabled{% endif %}>Proceed to Checkout</button>
+                </form>
+                <p class="secure-text">🔒 Secure Checkout Guaranteed</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

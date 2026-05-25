@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'customer_home.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="customer-header">
+    <div class="welcome-box">
+        <h1>Hey, <span class="user-name">{{username}}!</span></h1>
+        <p >What are we eating today? Explore our top-rated restaurants below.</p>
+    </div>
+</header>
+
+<main class="restaurant-grid">
+    {% for r in restaurantList %}
+    <div class="res-card">
+        <div class="card-image">
+            <img src="{{ r.picture }}" alt="{{ r.name }}" loading="lazy">
+            <div class="rating-tag">★ {{ r.rating }}</div>
+        </div>
+        <div class="card-content">
+            <h3 class="res-title">{{ r.name }}</h3>
+            <p class="res-cuisine">{{ r.cuisine }}</p>
+            <div class="card-footer">
+                <span class="delivery-time">25-30 mins</span>
+                <a href="{% url 'view_menu' r.id username %}" class="btn-order">View Menu</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</main>
+{% endblock %}

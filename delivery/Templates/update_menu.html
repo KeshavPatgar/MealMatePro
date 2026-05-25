@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/update_menu.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="update-menu-container">
+    <div class="card shadow-md">
+        <h2>Current Menu</h2>
+        <div class="table-container">
+            <table class="pro-table">
+                <thead>
+                    <tr>
+                        <th>Item name</th>
+                        <th>Picture</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Is veg?</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in itemList %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>
+                                <div class="img-frame">
+                                    <img src="{{ item.picture }}" alt="{{ item.name }} Image">
+                                </div>
+                            </td>
+                            <td>{{ item.description }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.vegeterian }}</td>
+                            <td>
+                                <a href="{% url 'open_edit_menu_item' restaurant.id item.id %}" class="btn btn-primary" style="background-color: #fc8019; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; display: inline-block; transition: background 0.3s; margin-right: 5px;" onmouseover="this.style.backgroundColor='#ed9b04'" onmouseout="this.style.backgroundColor='#fc8019'">
+                                    Edit
+                                </a>
+                                <a href="{% url 'delete_menu_item' restaurant.id item.id %}" onclick="return confirm('Are you sure you want to delete this menu item?');" class="btn btn-delete" style="background-color: #ff4757; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; display: inline-block; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#ff6b81'" onmouseout="this.style.backgroundColor='#ff4757'">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-md">
+        <h2>Add Menu Item</h2>
+        <form action="{% url 'update_menu' restaurant.id %}" method="post" class="modern-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="name">Item Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" class="form-control" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" step="0.01" class="form-control" required>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label for="vegeterian">Vegetarian:</label>
+                <input type="checkbox" id="vegeterian" name="vegeterian" class="form-check-input">
+            </div>
+
+            <div class="form-group">
+                <label for="picture">Image URL:</label>
+                <input type="url" id="picture" name="picture" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Item</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Success | MealMate Pro{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/success.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="status-wrapper">
+    <div class="status-card success-card">
+        <div class="status-icon success-icon">
+            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        
+        <h1 class="status-title">Welcome back, <span>{{ user.username }}</span>!</h1>
+        <p class="status-message">You have successfully authenticated into the MealMate Pro network.</p>
+        
+        <div class="action-grid">
+            <a href="{% url 'open_add_restaurant' %}" class="btn-primary">Add New Restaurant</a>
+            <!-- Using open_signin as fallback dashboard since /dashboard isn't standard in the URLs typically unless defined -->
+            <a href="{% url 'open_signin' %}" class="btn-secondary">View Dashboard</a>
+        </div>
+
+        <div class="footer-note">
+            <p>Not you? <a href="{% url 'logout' %}">Sign out</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

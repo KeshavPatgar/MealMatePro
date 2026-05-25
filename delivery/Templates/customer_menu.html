@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'customer_menu.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="menu-container">
+    <header class="menu-header">
+        <div class="user-info">
+            {% if search_query %}
+                <h3>Search Results for <span>"{{ search_query }}"</span></h3>
+                <p>Found {{ itemList|length }} items matching your search.</p>
+            {% else %}
+                <h3>Welcome, <span>{{ username|default:"Guest" }}</span>!</h3>
+                <p>What would you like to eat today?</p>
+            {% endif %}
+        </div>
+    </header>
+
+    {% if itemList %}
+        <div class="filter-section">
+            <button class="filter-btn active" onclick="filterMenu('all', this)">All Dishes</button>
+            <button class="filter-btn veg-btn" onclick="filterMenu('veg', this)">🟢 Pure Veg</button>
+            <button class="filter-btn nonveg-btn" onclick="filterMenu('non-veg', this)">🔴 Non-Veg</button>
+        </div>
+
+        <div class="menu-grid">
+            {% for item in itemList %}
+                <div class="dish-card" data-type="{% if item.vegeterian %}veg{% else %}non-veg{% endif %}">
+                    <div class="dish-image">
+                        <img src="{{ item.picture }}" alt="{{ item.name }}" loading="lazy" onerror="this.src='https://placehold.co/80x80?text=Delicious'">
+                    </div>
+                    <div class="dish-details">
+                        <div class="dish-header">
+                            <h4 class="dish-name">{{ item.name }}</h4>
+                            {% if item.vegeterian %}
+                                <span class="type-badge veg-badge">Veg</span>
+                            {% else %}
+                                <span class="type-badge nonveg-badge">Non-Veg</span>
+                            {% endif %}
+                        </div>
+                        <div class="dish-restaurant">{{ item.restaurant.name }}</div>
+                        <p class="dish-desc">{{ item.description }}</p>
+                        <div class="dish-footer">
+                            <span class="dish-price">₹{{ item.price }}</span>
+                            <a href="{% if username %}{% url 'add_to_cart' item.id username %}{% else %}{% url 'open_signin' %}{% endif %}" class="add-btn">
+                                Add to Cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">🍽️</div>
+            <h2>It's looking a bit empty here!</h2>
+            <p>We couldn't find any dishes right now. Try exploring other restaurants or check back later.</p>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+function filterMenu(type, btnElement) {
+    const cards = document.querySelectorAll('.dish-card');
+    const buttons = document.querySelectorAll('.filter-btn');
+    
+    // Toggle active classes on buttons
+    buttons.forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    // Instantly filter out the menu items
+    cards.forEach(card => {
+        if (type === 'all' || card.getAttribute('data-type') === type) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
+{% endblock %}

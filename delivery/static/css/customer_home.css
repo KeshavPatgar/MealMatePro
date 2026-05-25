@@ -1,0 +1,124 @@
+:root {
+    --primary: #fc8019;
+    --secondary: #ffffff;
+    --bg-light: #fbfbfb;
+    --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.customer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.welcome-box h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-box .user-name {
+    color: var(--primary);
+}
+
+.welcome-box p {
+    color: #666;
+}
+
+.search-bar input {
+    padding: 0.8rem 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    width: 300px;
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+.search-bar input:focus {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.res-card {
+    background: var(--secondary);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s;
+}
+
+.res-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    position: relative;
+    height: 200px;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rating-tag {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #4caf50;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.res-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.res-cuisine {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+.delivery-time {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.btn-order {
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-order:hover {
+    background: #e06d10;
+}

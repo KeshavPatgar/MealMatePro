@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/update_restaurant.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="edit-wrapper">
+    <div class="edit-card">
+        <div class="edit-header">
+            <h2>Edit <span>Menu Item</span></h2>
+            <p>Modify the details for <strong>{{item.name}}</strong></p>
+        </div>
+
+        <form action="{% url 'edit_menu_item' restaurant.id item.id %}" method="post" class="edit-form">
+            {% csrf_token %}
+            
+            <div class="form-row">
+                <label for="name">Item Name</label>
+                <input type="text" id="name" name="name" value="{{item.name}}" required>
+            </div>
+            <div class="form-row">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="3" required style="width: 100%; padding: 12px; border: 1px solid #dfe6e9; border-radius: 10px; font-family: inherit;">{{item.description}}</textarea>
+            </div>
+            <div class="form-row">
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" step="0.01" value="{{item.price}}" required>
+            </div>
+            <div class="form-row" style="display: flex; align-items: center; gap: 10px;">
+                <label for="vegeterian" style="margin-bottom: 0;">Is Vegetarian?</label>
+                <input type="checkbox" id="vegeterian" name="vegeterian" {% if item.vegeterian %}checked{% endif %} style="width: auto;">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-cancel" onclick="history.back()">Cancel</button>
+                <button type="submit" class="btn-update">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
